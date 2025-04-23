@@ -1,0 +1,15 @@
+<launch>
+    <node pkg="fake_odom" type="fake_odom" name="fake_odom_drone2" output="screen">
+        <param name="odom_topic" type ="string" value="/drone2_odom" />
+    </node>
+    <node pkg="nlink_parser" type="linktrack" name="drone2_linktrack0" output="screen">
+        <param name="port_name" value="/dev/drone2_uwb0" />
+        <param name="baud_rate" value="921600" />
+	<remap from="/nlink_linktrack_nodeframe2" to="/drone2_uwb"/>
+    </node>
+    <node pkg="nlink_parser" type="linktrack" name="drone2_linktrack1" output="screen">
+        <param name="port_name" value="/dev/drone2_uwb1" />
+        <param name="baud_rate" value="921600" />
+	<remap from="/nlink_linktrack_nodeframe2" to="/drone2_uwb"/>
+    </node>
+</launch>

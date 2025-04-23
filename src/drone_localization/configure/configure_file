@@ -1,0 +1,61 @@
+#drone droneID attached_tag_id x y z (relative position)
+#human humanID attached_tag_id x y z (relative position)
+drone 1 1 0.1425 -0.1425 0
+drone 1 2 0.1425 -0.1425 0
+drone 1 3 -0.1425 0.1425 0
+drone 1 4 -0.1425 0.1425 0
+human 1 5 0 -0.125 0
+height drone 1 0.0
+height human 1 0.0
+#initial postions of uavs and human, including the x y and theta, defaults are 0
+initial_UAV1 0 0 0
+initial_human 0 0 0
+#the number of particles used for state estimation
+particles 500
+#distance movement required before performing UWB update
+update_min_d 0.4
+#rotation required before performing UWB update
+update_min_a 0.2
+#visualization control: set a negative value to disable the visualization, a positive value to enable the visulization of the path within a time window
+#for example 1000 means show the path in last 1000 seconds, set it to 0 or negative to disable the visualization
+enable_visualization 1000
+#allow the particle filter to correct the z estimation, default 0 (i.e., not allow to correct the z)
+enable_z_correction 0
+#force human move in 2D, set the roll, pitch, and z of human odom to be zero
+force_human_in_2d 1
+#downsample human odom due to the high frequency published by the human, i.e., 0.5 means only 50% of human odom are used
+human_odom_downsample_ratio 0.1
+#downsample uav odom due to the high frequency published by the uavs
+uav_odom_downsample_ratio 0.1
+#number of human particles with fast motion (5 times of normal motion)
+fast_motion_ratio 0.005
+#percent of uwb measures to update particles when human/drone are static, 0.003 is similar to a frequency of 1 (assume we have 6 uwb tags, each published at a frequency of 50 Hz)
+static_update_ratio 0.001
+#threshold of std dev of the uwb ranging, if large than this value, the ranging will be ignored. set it to negative to disable this function
+UWB_ranging_filtering 0.5
+#noise of UWB ranging
+UWB_ranging_sigma 1.0
+#1: use the lowest ranging instead of all ranging, <1: use all ranging
+use_min_ranging -1
+#specify the frame_id of the messages published by ROS
+frame_id odom
+#specify the topic names subscribed by the node
+#UWB subscribed
+UAV1_uwb /drone1_uwb
+Human_uwb /human_uwb
+#Odom subscribed
+UAV1_odom /uav1/t265/odom/sample
+human_odom /imu_odometry
+#specify the topic name published by the node
+UAV1_pose /UAV1Pose
+Human_pose /HumanPose
+#specify the frame_id in tf
+UAV1_frame_id odom
+Human_frame_id odom
+#specify the child_frame_id in tf
+UAV1_child_frame_id uav1
+Human_child_frame_id human
+#new added topics for relative localization
+relative_human_UAV1_published_topic /HumanUAV1RelativePose
+
+relative_UAV1_human_published_topic /UAV1HumanRelativePose

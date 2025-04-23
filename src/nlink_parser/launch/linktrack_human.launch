@@ -1,0 +1,15 @@
+<launch>
+    <node pkg="fake_odom" type="fake_odom" name="fake_odom_human" output="screen">
+        <param name="odom_topic" type ="string" value="/imu_odometry" />
+    </node>
+    <node pkg="nlink_parser" type="linktrack" name="human_linktrack0" output="screen">
+        <param name="port_name" value="/dev/human_uwb0" />
+        <param name="baud_rate" value="921600" />
+	<remap from="/nlink_linktrack_nodeframe2" to="/human_uwb"/>
+    </node>
+    <node pkg="nlink_parser" type="linktrack" name="human_linktrack1" output="screen">
+        <param name="port_name" value="/dev/human_uwb1" />
+        <param name="baud_rate" value="921600" />
+	<remap from="/nlink_linktrack_nodeframe2" to="/human_uwb"/>
+    </node>
+</launch>

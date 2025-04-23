@@ -1,0 +1,8 @@
+<launch>
+ <node name="rfidsensor_sim_node" pkg="rfid_sensor_simulator" type="rfidsensor_sim_node">
+    <param name="sensor_model" value="$(find rfid_sensor_simulator)/sensor_models/scitos_elatec_2d_default.model" />
+    <param name="rate" value="50" />
+    <param name="reader_cylcles" value="1" />
+    <param name="reader_count"   value="1" />
+ </node>
+</launch>

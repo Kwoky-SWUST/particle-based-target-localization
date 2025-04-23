@@ -1,0 +1,5 @@
+<launch>
+ <node name="drone_localization" pkg="drone_localization" type="drone_localization">
+    <param name="configure" value="$(find drone_localization)/configure/configure_file" />
+ </node>
+</launch>
